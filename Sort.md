@@ -185,7 +185,7 @@
 > 정지된 위치의 숫자를 교환
 > low와 high가 교차하면 종료
 
-<img width="1056" alt="스크린샷 2021-06-05 오후 6 06 12" src="https://user-images.githubusercontent.com/68215452/120913541-b9f1de80-c6d2-11eb-81b6-6f413fedd397.png">
+<img width="786" alt="스크린샷 2021-06-06 오후 2 22 46" src="https://user-images.githubusercontent.com/68215452/120914409-25d74580-c6d9-11eb-84d9-2b214c431ecc.png">
 
 
 - python code
