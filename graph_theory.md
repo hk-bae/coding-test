@@ -8,7 +8,7 @@
 
 
 
-1. [서로소 집합](#서로소 집합)
+1. [서로소 집합](#서로소-집합)
 2. [크루스칼 알고리즘](#kruskal's-algorithm)
 3. [위상정렬](#topological-sorting)
 
@@ -128,7 +128,7 @@
 
     * 이러한 조건은 트리의 성립 조건이기도 하다.
 
-    ![스크린샷 2021-07-12 오후 7.26.21](/Users/baehangyeol/Library/Application Support/typora-user-images/스크린샷 2021-07-12 오후 7.26.21.png)
+    ![스크린샷 2021-07-12 오후 7.26.21](/Users/baehangyeol/Library/Application Support/typora-user-images/스크린샷 2021-07-12 오후 7.26.21.png)
 
     * 최소 신장트리를 찾는 것이 문제로 나온다.
 
