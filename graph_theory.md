@@ -8,7 +8,7 @@
 
 
 
-1. [서로소 집합](#서로소 집합)
+1. [서로소 집합](#서로소-집합)
 2. [크루스칼 알고리즘](#kruskal's-algorithm)
 3. [위상정렬](#topological-sorting)
 
@@ -22,7 +22,7 @@
 
 * Union-find 자료구조
 
-  * unioon : 2개의 원소가 포함된 집합을 하나의 집합으로 합치는 연산
+  * union : 2개의 원소가 포함된 집합을 하나의 집합으로 합치는 연산
   * find : 특정한 원소가 속한 집합이 어떤 집합인지 알려주는 연산
 
     
@@ -128,7 +128,7 @@
 
     * 이러한 조건은 트리의 성립 조건이기도 하다.
 
-    ![스크린샷 2021-07-12 오후 7.26.21](/Users/baehangyeol/Library/Application Support/typora-user-images/스크린샷 2021-07-12 오후 7.26.21.png)
+    ![스크린샷 2021-07-12 오후 7.26.21](/Users/baehangyeol/Library/Application Support/typora-user-images/스크린샷 2021-07-12 오후 7.26.21.png)
 
     * 최소 신장트리를 찾는 것이 문제로 나온다.
 
@@ -260,9 +260,9 @@
         if indegree[i] == 0 :
           q.append(i)
   
-      # 위상 정렬 수행 결과 출력
-      for i in result :
-        print(i,end = ' ')
+    # 위상 정렬 수행 결과 출력
+    for i in result :
+      print(i,end = ' ')
         
   topology_sort()
    
