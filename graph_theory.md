@@ -22,7 +22,7 @@
 
 * Union-find 자료구조
 
-  * unioon : 2개의 원소가 포함된 집합을 하나의 집합으로 합치는 연산
+  * union : 2개의 원소가 포함된 집합을 하나의 집합으로 합치는 연산
   * find : 특정한 원소가 속한 집합이 어떤 집합인지 알려주는 연산
 
     
@@ -260,9 +260,9 @@
         if indegree[i] == 0 :
           q.append(i)
   
-      # 위상 정렬 수행 결과 출력
-      for i in result :
-        print(i,end = ' ')
+    # 위상 정렬 수행 결과 출력
+    for i in result :
+      print(i,end = ' ')
         
   topology_sort()
    
