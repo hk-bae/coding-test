@@ -1,3 +1,5 @@
+# https://programmers.co.kr/learn/courses/30/lessons/72414
+
 def timeToIndex(time) :
     h,m,s = map(int,time.split(':'))
     return 3600 * h + 60 * m + s

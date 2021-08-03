@@ -1,3 +1,5 @@
+# https://www.acmicpc.net/problem/1517
+
 import sys
 
 result = 0
@@ -19,11 +21,11 @@ def merge_sort(start,end) :
             if array[i] <= array[j] :
                 new_arr.append(array[i])
                 i += 1
-                result += tmp
+                result += tmp # swap 횟수 추가
             else : 
                 new_arr.append(array[j])
                 j += 1
-                tmp += 1
+                tmp += 1 # 왼쪽 배열보다 우선으로 들어간 수를 카운트
                 
         if i == mid :
           for k in range(j,end) :
@@ -31,7 +33,7 @@ def merge_sort(start,end) :
         else : 
           for k in range(i,mid) :
             new_arr.append(array[k])
-            result += tmp
+            result += tmp # 남은 swap 횟수 추가
             
         for i in range(start,end) :
             array[i] = new_arr[i-start]

@@ -1,5 +1,6 @@
 #https://www.acmicpc.net/problem/14502
 
+# dfs
 from itertools import combinations
 
 n,m = map(int,input().split())
@@ -67,3 +68,6 @@ for candidate in candidates :
     maxSafeArea = max(maxSafeArea,getSafeArea())
 
 print(maxSafeArea)
+
+# bfs
+

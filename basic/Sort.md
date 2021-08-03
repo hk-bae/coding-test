@@ -35,7 +35,7 @@
                 for j in range(n -1 - i) : 
                     if A[j+1] < A[j] :
                         A[j+1],A[j] = A[j],A[j+1]
-                        
+    
 - 시간복잡도 : O(n^2)
 - Brute-forece 알고리즘의 일종
 
@@ -69,7 +69,7 @@
                         A[j],A[j-1] = A[j-1],A[j]
                     else :
                         break
-                        
+    
 - 시간복잡도 : O(n^2)
 - 삽입정렬의 시간 복잡도는  O(N^2) 이지만 최선의 경우 O(n)에 수렴한다. 
 - 삽입정렬은 대상 리스트가 거의 정렬되어 있는 상태라면 매우 빠르게 동작한다.
@@ -120,54 +120,47 @@
 
 - python code
         
-        import copy
-
-        def merge_sort(a) :
-            n = len(a)
-            b = []
-            c = []
-
+        import sys
+        
+        sys.setrecursionlimit(10 ** 9)
+        
+        def merge_sort(start,end) :
+            
+            n = end - start
+            print(start,end)
+        
             if n > 1 :
-                # divde
-                middle = n // 2
-                b[0:middle] = copy.deepcopy(a[0:middle]) 
-                c[0:middle] = copy.deepcopy(a[middle:])
-                merge_sort(b)
-                merge_sort(c)
-                # conquer
-                merge(b,c,a)
-                
-        def merge(b,c,a) :
-            p = len(b)
-            q = len(c)
-                    
-            i,j,k = 0,0,0
-                    
-            #정렬된 b와 c배열을 비교해 가며 작은 것 부터 차례로 a에 삽입
-            while i<p and j<q :
-                if b[i] <= c[j] :
-                    a[k] = b[i]
-                    i = i + 1
-                else :
-                    a[k] = c[j]
-                    j = j + 1
-                k = k + 1
+                mid = (start+end) // 2
+                merge_sort(start,mid)
+                merge_sort(mid,end)
+        
+                new_arr = []
+                i,j = start,mid
+                while i < mid and j < end :
+                    if array[i] <= array[j] :
+                        new_arr.append(array[i])
+                        i += 1
+                    else :
+                        new_arr.append(array[j])
+                        j += 1
                         
-            # 남은 부분 카피
-            if i == p :
-                a[k:] = copy.deepcopy(c[j:])
-            else :
-                a[k:] = copy.deepcopy(b[i:])
+                if i == mid :
+                  for k in range(j,end) :
+                    new_arr.append(array[k])
+                else :
+                  for k in range(i,mid) :
+                    new_arr.append(array[k])
+                    
+                for i in range(start,end) :
+                    array[i] = new_arr[i-start]
 
 
 
 
         a = [1,4,5,6,2,4,6,8,0,1,29,3]
-
         merge_sort(a)
-
         print(a)
-        
+
 - 시간복잡도 : O(nlogn)
 
 ### quicksort (퀵 정렬)
@@ -207,15 +200,16 @@
                     right -= 1
                 
                 if left > right : #엇갈렸다면 작은 데이터와 피벗을 교체
-                    array[right],array[pivot] = array[right] >= array[pivot]
+                    array[right],array[pivot] = array[pivot] >= array[right]
                 else :
-                array[left],array[right] = array[right],array[left]
+        		        array[left],array[right] = array[right],array[left]
                 
             # 분할 이후 왼쪽과 오른쪽에 대하여 퀵정렬 재귀 호출
             quick_sort(array,start,right - 1)
             quick_sort(array,right + 1, end)
-            
-            
+    
+    
+    ​        
             #파이썬의 장점을 살려 짧게 작성한 퀵 정렬 소스코드
             #피벗과 데이터를 비교하는 비교 연산횟수가 증가하므로 시간 면에서는 비효율적
             def quick_sort2(array) :
@@ -229,8 +223,8 @@
                 right_side = [x for x in tail if x > pivot] #분할된 오른쪽 부분
                 
                 #분할 이후 왼쪽과 오른쪽 부분에 대한 각각 정렬을 수행하고 전체 리스트 반환
-                return quick_sort2(left_side) + [pivot] + quick_sort(right_side)
-                
+                return quick_sort2(left_side) + [pivot] + quick_sort2(right_side)
+    
 - 시간 복잡도 : Best Case(O(nlogn)), Worst Case(O(n^2)), Average case(O(nlogn))
 - 퀵정렬은 호어 파티셔닝 기법을 사용할 때 이미 데이터가 정렬되어 있는 경우에는 매우 느리게 동작한다. (삽입정렬과 반대)
         
@@ -243,7 +237,7 @@
 - 카운트 정보를 배열을 정렬하는데 사용한다.
 - 특정한 조건이 부합할 때만 사용할 수 있지만 매우 빠른 정렬 알고리즘    
 - 데이터의 크기 범위가 제한되어 정수 형태로 표현할 수 있을 때만 사용 가능
-- 일반적으로 가장 큰 데이터와 작은 데이터의 차이가 1,000,000을 넘지 않을 때
+- 일반적으로 **가장 큰 데이터와 작은 데이터의 차이가 1,000,000을 넘지 않을 때**
 
 - python code
 
@@ -262,7 +256,7 @@
                     result.append(i)
                     
             return result
-            
+    
 - 모든 데이터가 양의 정수인 상황에서 데이터의 개수를 N, 데이터 중 최대 값의 크기를 K라고 할 때, 계수 정렬의 시간 복잡도는 O(N+K) 이다.
 - 사실상 현존하는 정렬 알고리즘 중에서 기수 정렬과 더불어 가장 빠르다.
 - 하지만 공간 효율성에 심각한 비효율성을 초래할 수 있다.

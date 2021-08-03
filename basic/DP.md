@@ -15,7 +15,7 @@
 * 특정 문제가 완전 탐색 알고리즘으로 접근했을 때 시간이 매우 오래 걸리면 DP를 적용할 수 있는지 해결하고자 하는 부분 문제들의 중복 여부를 확인
 * 우선 단순 재귀 함수로 프로그램을 작성한 뒤에 (탑다운) 작은 문제에서 구한 답이 큰 문제에서 그대로 활용될 수 있다면 (즉 메모이제이션 기법을 적용할 수 있다면) 코드를 개선하는 것도 좋은 아이디어이다.
 * 가능하다면 재귀함수를 이용하는 탑다운 방식보다는 바텀업 방식으로 구현하는 것을 권장
-  * 시스템상 재귀 함수의 스택 크기가 한정되어 이승ㄹ 수 잇다.
+  * 시스템상 재귀 함수의 스택 크기가 한정되어 있을 수 있다.
   * 이 경우 sys라이브러리에 포함된 setrecurswionlimit() 함수를 호출하여 재귀 제한을 완화할 수 있다
 
 ### Example1 : 피보나치 수열 (top - down)
@@ -142,7 +142,7 @@ def changeMaking(coins,n) :
     tmp = 1e9
     j = 1
     while j < len(coins) and i >= coins[j] :
-      tmp = min(results[i-array[j]], tmp)
+      tmp = min(results[i-coins[j]], tmp)
       j = j + 1
     results[i] = tmp + 1
  return results

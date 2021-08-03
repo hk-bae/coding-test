@@ -1,4 +1,4 @@
-Shortest Path
+# Shortest Path
 
 -  아래 내용들을 기반으로 정리합니다.
 
@@ -71,7 +71,7 @@ Shortest Path
   * 여기서는 최단경로가 아닌 ''최단 거리'를 구하는 알고리즘으로 구현됨
   * 시간복잡도 : O(V^2)
   * 각 노드에 대한 최단 거리를 담는 1차원 리스트 선언
-  * 단계마다 방문하지 않은 노드 중에서 최단거리가 가장 짧은 노드를 서낵하기 위해 매 단계마다 1차원 리스트의 모든 원소를 확인(순차 탐색)
+  * 단계마다 방문하지 않은 노드 중에서 최단거리가 가장 짧은 노드를 선택하기 위해 매 단계마다 1차원 리스트의 모든 원소를 확인(순차 탐색)
   * input() 보다 더 빠르게 동작하는 sys.std.readline() 으로 치환함
   * 만약 노드의 개수가 **5,000개 이하** 라면 이 코드로 해결할 수 있다.
     * 노드 개수가 **10,000개**를 넘어가는 문제라면 이 코드로 해결하기 어렵다.
@@ -183,7 +183,6 @@ Shortest Path
       #가장 최단 거리가 짧은 노드에 대한 정보 꺼내기
       dist,now = heapq.heappop(q)
       #현재 노드가 이미 처리된 적이 있는 노드라면 무시
-      # 이 코드가 정말 필요한 코드인가??
       if distance[now] < dist :
         continue
       # 현재 노드와 연결된 다른 인접한 노드들을 확인
@@ -205,8 +204,8 @@ Shortest Path
   
       
   ```
-
   
+
 
 ## Bellman Ford's Algorithm
 
@@ -220,6 +219,51 @@ Shortest Path
     3. 현재 정점에서 모든 인접 정점들을 탐색하며 기존에 저장된 인접 정점까지의 거리보다 현재 정점을 거쳐 인접 정점에 도달하는 경우가 더 짧은 경우 갱신
     4. 3번의 과정을 V-1 번 반복
     5. 위 과정을 모두 마치고 난 후 거리가 갱신되는 경우가 생긴다면 이는 음수 사이클이 존재하는 것
+
+```python
+import sys
+
+input = sys.stdin.readline
+INF = 1e9
+
+def bellman_ford(start) :
+    distance[start] = 0
+    
+    # 전체 n-1번 반복, 마지막 한번은 음수 싸이클 확인
+    for i in range(n) :
+        # 모든 간선 확인
+        for j in range(m) :
+            now = edges[j][0]
+            next = edges[j][1]
+            dist = edges[j][2]
+            
+            if distance[now] != INF and distance[next] > distance[now] + dist :
+                distance[next] = distance[now] + dist
+                # 음수 싸이클 판정
+                if i == n-1 :
+                    return False
+    return True
+                    
+
+n,m = map(int,input().split())
+distance = [INF] * (n+1)
+edges = []
+
+for _ in range(m) :
+    a,b,c = map(int,input().split())
+    edges.append((a,b,c))
+
+if bellman_ford(1) :
+    for i in range(2,n+1) :
+        if distance[i] == INF :
+            print('-1')
+        else :
+            print(distance[i])
+else :
+    print('-1')
+```
+
+
 
 
 

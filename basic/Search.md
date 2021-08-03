@@ -11,39 +11,50 @@
 
 - python code
 
-        def sequential_search(n,target,array) :
-            for i in range(n) :
-                if array[i] == target :
-                    return i + 1
+    ```python
+    def sequential_search(n,target,array) :
+        for i in range(n) :
+            if array[i] == target :
+                return i + 1
+    ```
     
 - 시간복잡도 : O(N)
 
 
 ## binary search(이진 탐색)
 - 정렬된 리스트에 대하여 탐색을 진행
+
 - 데이터가 무작위일 경우는 사용할 수 없다.
+
 - 이진 탐색은 탐색 범위를 절반씩 좁혀가며 데이터를 탐색한다.
+
 - 시작점, 끝점, 중간점을 이용
+
 - 찾으려는 데이터와 중간점 위치에 잇는 데이터를 반복적으로 비교해서 원하는 데이터를 찾는 게 이진 탐색 과정이다.
+
 - 시간 복잡도 : O(logN)
+
 - 재귀함수를 이용하여 구현할 수 있고 반복문을 이용하여 구현할 수 있다.
 
 - python code
 
-        # 재귀함수를 이용한 구현
-          def binary_search(array,target,start,end):
-            if start > end :
-                return None
-            mid = (start + end) // 2
-            if array[mid] == target :
-                return mid
-            elif array[mid] > target :
-                return binary_search(array,target,start,mid -1)
-            else :
-                return bianry_search(array,target,mid+1,end)
-    
+    ```python
+    # 재귀함수를 이용한 구현
+      def binary_search(array,target,start,end):
+        if start > end :
+            return None
+        mid = (start + end) // 2
+        if array[mid] == target :
+            return mid
+        elif array[mid] > target :
+            return binary_search(array,target,start,mid -1)
+        else :
+            return bianry_search(array,target,mid+1,end)
+    ```
     
     ​    
+    
+    ```python
         # 반복문을 이용한 구현
         def binary_search(array,target,start,end):
             while start <= end :
@@ -54,12 +65,16 @@
                     end = mid - 1
                 else :
                     start = mid + 1
-            
-            return None
+    
+    		return None
+    ```
     
 - 이진 탐색의 소스코드 구현을 할 줄 알아야 한다.
+
 - 이진 탐색 문제는 탐색 범위가 큰 상황에서의 탐색을 가정하는 문제가 많다.
+
 - 따라서 탐색 범위가 2,000만을 넘어가면 이진 탐색으로 문제 접근을 권한다.
+
 - 이진 탐색 문제의 경우 데이터 입력 시간을 줄이기 위해 sys 라이브러리를 사용하는 것이 좋다.
 
         import sys

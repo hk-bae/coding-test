@@ -1,67 +1,67 @@
 from itertools import combinations
+
 n = int(input())
 
-school = [] #전체 학교 복도
-x = [] # 빈공간
-t = [] #선생님
+graph = []
+
+t_array = []
+x_array = []
 
 for i in range(n) :
-    school.append(list(input().split()))
-
-for i in range(n) :
+    graph.append(list(input().split()))
     for j in range(n) :
-        if school[i][j] == 'X' :
-            x.append((i,j)) # 빈 공간 위치 추가
-        elif school[i][j] == 'T' :
-            t.append((i,j)) #선생님 위치 추가
-
-
-def dfs(x,y,d):
-    dx = [1,-1,0,0] 
+        if graph[i][j] == 'T' :
+            t_array.append((i,j))
+        elif graph[i][j] == 'X' :
+            x_array.append((i,j))
+            
+def dfs(x,y,i) :
+    dx = [1,-1,0,0]
     dy = [0,0,1,-1]
     
-    nx = x + dx[d]
-    ny = y + dy[d]
+    nx = x + dx[i]
+    ny = y + dy[i]
     
     if 0 <= nx < n and 0 <= ny < n :
-        if tmp[nx][ny] == 'S' :
-            return False # 실패
-        elif tmp[nx][ny] =='O' :
+        if graph[nx][ny] == 'S' :
+            return False
+        elif graph[nx][ny] == 'O' :
             return True
         else :
-            return dfs(nx,ny,d)
+            return dfs(nx,ny,i)
     else :
-        return True 
-
-def copy() :
-  for i in range(n) :
-    for j in range(n) :
-      tmp[i][j] = school[i][j]
-
-
-
-
-
-x_candidates = list(combinations(x,3)) # 빈 공간중 3개를 고르는 조합
-tmp = [[''] * n for _ in range(n)]
-result = "YES"
-
-for candidate in x_candidates :
-    copy() #학교 복도 복사
-
-    for x,y in candidate : # 각 장애물 추가
-        tmp[x][y] = 'O'
-    
-    result = 'YES'
-
-    for tx,ty in t : # 각 선생님 확인
-        for d in range(4) : # 상하좌우 확인
-            if not dfs(tx,ty,d) : #실패
-                result = 'NO'
-                break
-        if result == 'NO' : break
-    
-    if result == 'YES' : break
+        return True
         
+            
+#장애물 3개 조합
+candidates = list(combinations(x_array,3))
+
+answer = True
+
+for c in candidates :
+    # 장애물 설치
+    graph[c[0][0]][c[0][1]] = 'O'
+    graph[c[1][0]][c[1][1]] = 'O'
+    graph[c[2][0]][c[2][1]] = 'O'
     
-print(result)
+    answer = True
+    # 모든 선생님 위치에서 확인
+    for x,y in t_array :
+        # 네 방향 모두 확인
+        for i in range(4) :
+            answer = answer and dfs(x,y,i)
+            
+    if answer :
+        break
+        
+    # 원래대로
+    graph[c[0][0]][c[0][1]] = 'X'
+    graph[c[1][0]][c[1][1]] = 'X'
+    graph[c[2][0]][c[2][1]] = 'X'
+    
+
+if answer :
+    print("YES")
+else :
+    print("NO")
+        

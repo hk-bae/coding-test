@@ -3,6 +3,7 @@ import sys
 
 input = sys.stdin.readline
 
+# 재귀호출을 이용한 백트래킹 수행
 def learn(i,k) :
     global result
     
