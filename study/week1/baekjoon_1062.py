@@ -1,4 +1,5 @@
 # https://www.acmicpc.net/problem/1062
+# backtracking
 import sys
 
 input = sys.stdin.readline

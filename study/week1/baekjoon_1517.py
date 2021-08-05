@@ -1,5 +1,5 @@
 # https://www.acmicpc.net/problem/1517
-
+# merge sort
 import sys
 
 result = 0

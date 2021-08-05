@@ -1,5 +1,5 @@
 # https://www.acmicpc.net/problem/1012
-
+# bfs
 import sys
 from collections import deque
 

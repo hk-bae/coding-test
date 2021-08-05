@@ -1,4 +1,5 @@
 # https://programmers.co.kr/learn/courses/30/lessons/72414
+# dp
 
 def timeToIndex(time) :
     h,m,s = map(int,time.split(':'))
