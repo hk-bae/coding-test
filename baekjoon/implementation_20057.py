@@ -2,7 +2,7 @@ import sys
 
 input = sys.stdin.readline
 
-# 9도 반시계 방향 회전
+# 90도 반시계 방향 회전
 def rotate_sand() :
     for i in range(10) : 
         sand_info[i][1],sand_info[i][2] = -sand_info[i][2],sand_info[i][1]
@@ -55,7 +55,6 @@ while not (point_x == 0 and point_y == 0)  :
             if 0 <= nx < N and 0 <= ny < N :
                 graph[nx][ny] += p_sand # 모래 이동
             else :
-                print(nx,ny,p_sand)
                 res += p_sand # 격자 밖으로 모래 이동
         
         # 알파에 해당하는 모래 이동
@@ -65,7 +64,6 @@ while not (point_x == 0 and point_y == 0)  :
         if 0<= nx < N and 0 <= ny < N :
             graph[nx][ny] += remain_sand
         else :
-            print(nx,ny,remain_sand)
             res += remain_sand
 
          
@@ -75,6 +73,5 @@ while not (point_x == 0 and point_y == 0)  :
         move_cnt = 0
     d = (d + 1) % 4
     rotate_sand()
-    print("##",sand_info[-1][1],sand_info[-1][2])
     
 print(res)
