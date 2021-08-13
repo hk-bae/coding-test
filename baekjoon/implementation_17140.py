@@ -28,7 +28,7 @@ else :
             col = 2
             # A의 모든 행에 대하여 정렬 수행
             for i in range(1,101) : 
-                cnt = [0] * 100 # 1 - 99의 수의 개수를 저장할 배열
+                cnt = [0] * 101 # 1 - 100의 수의 개수를 저장할 배열
                 for j in range(1,101) :
                     if A[i][j] == 0 : 
                         continue
@@ -37,7 +37,7 @@ else :
                 q = []
                 # 1-99의 수에대한 개수를 heapq에 넣는다.
                 # (개수,숫자)
-                for m in range(1,100) :
+                for m in range(1,101) :
                     if cnt[m] != 0 : 
                         heapq.heappush(q,(cnt[m],m))
 
@@ -59,7 +59,7 @@ else :
             row = 2 
             # A의 모든 열에 대하여 정렬 수행
             for j in range(1,101) : 
-                cnt = [0] * 100 # 1 - 99의 수의 개수를 저장할 배열
+                cnt = [0] * 101 # 1 - 99의 수의 개수를 저장할 배열
                 for i in range(1,101) :
                     if A[i][j] == 0 : 
                         continue
@@ -68,7 +68,7 @@ else :
                 q = []
                 # 1-99의 수에대한 개수를 heapq에 넣는다.
                 # (개수,숫자)
-                for m in range(1,100) :
+                for m in range(1,101) :
                     if cnt[m] != 0 : 
                         heapq.heappush(q,(cnt[m],m))
 
