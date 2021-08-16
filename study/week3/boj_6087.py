@@ -3,7 +3,7 @@ import sys
 sys.setrecursionlimit(10**4)
 input = sys.stdin.readline
 
-# 현재 위치, 거울의 개수, 방향
+# 현재 위치, 방향
 def dfs(x,y,d):
     global W,H,res
 

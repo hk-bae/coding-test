@@ -1,5 +1,5 @@
 # pypy 통과 python3 시간초과
-# ㅇㄹㄴ
+
 import sys
 from collections import deque
 
