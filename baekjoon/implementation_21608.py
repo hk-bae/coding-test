@@ -13,8 +13,8 @@ dy = [0,0,1,-1]
 
 for i in range(1,n*n) :
     s,s1,s2,s3,s4 = students[i]
-    max_value = 0
-    max_empty = 0
+    max_value = -1
+    max_empty = -1
     for x in range(n) :
         for y in range(n) :
             # 확인할 자리가 빈자리인 경우 체크
