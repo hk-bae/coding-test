@@ -33,10 +33,6 @@ for i in range(1,m+1) :
     for j in range(1,5) :
         priority[i][j] = [0] + list(map(int,input().split()))
 
-# for i in range(0,m+1) :
-#     for j in range(0,5) :
-#         print(priority[i][j],end = ' ')
-#     print()
 
 time = 0
 alive = [True] * (m+1) # 생존 목록
@@ -76,7 +72,6 @@ while True :
                         move = True
                         break
                     else : # 더 낮은 번호의 상어가 이미 선점한 경우
-                        print("#",i,nx,ny,area[nx][ny],time)
                         alive_cnt -= 1
                         alive[i] = False
                         break

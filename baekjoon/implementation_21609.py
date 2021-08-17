@@ -44,11 +44,11 @@ while True :
                             if graph[nx][ny] == 0 : # 무지개블록인지 확인
                                 tmp_rainbow += 1
                                 rainbow_group.append((nx,ny))
-
-                            # 기준 블록이 변화하는지 확인.
-                            if tmp_x > nx or (tmp_x == nx and tmp_y > ny) :
-                                tmp_x = nx
-                                tmp_y = ny    
+                            else :
+                                # 기준 블록이 변화하는지 확인.
+                                if tmp_x > nx or (tmp_x == nx and tmp_y > ny) :
+                                    tmp_x = nx
+                                    tmp_y = ny    
                                 
                                     
 
@@ -64,38 +64,31 @@ while True :
                 # 가장 큰 블록 그룹과 비교
                 if tmp_size > max_size : # 크기 우선 비교
                     max_size,max_rainbow,block_group,standard_x,standard_y = tmp_size,tmp_rainbow,tmp_group,tmp_x,tmp_y
-                    print(tmp_size,i,j)
                 elif tmp_size == max_size : # 크기가 같을 경우
                     if tmp_rainbow > max_rainbow : # 무지개 블록 개수 비교
                         max_size,max_rainbow,block_group,standard_x,standard_y = tmp_size,tmp_rainbow,tmp_group,tmp_x,tmp_y
-                        print(tmp_size,i,j)
                     elif tmp_rainbow == max_rainbow : # 무지개 블록 개수도 같을 경우
                         if standard_x < tmp_x or (standard_x == tmp_x and standard_y < tmp_y) : # 행,열 비교
                             max_size,max_rainbow,block_group,standard_x,standard_y = tmp_size,tmp_rainbow,tmp_group,tmp_x,tmp_y
-                            print(tmp_size,i,j)
+                        
                          
             
     # 더이상 블록이 남아있지 않는 경우
     if max_size == 0 : 
         break
 
-    print(max_size)
-
     # 2. 1에서 찾은 블록 제거
     for x,y in block_group :
         graph[x][y] = -2
 
     score += pow(max_size,2)
-    print("###maxsize;",max_size)
-
-    print("after remove")
-    for i in range(n) :
-        for j in range(n) :
-            print(graph[i][j],end = ' ' )
-        print()
-
-
     
+    # print("after remove")
+    # for i in range(n) :
+    #     for j in range(n) :
+    #         print(graph[i][j],end = ' ' )
+    #     print()
+
     #3. 격자 중력 작용
     after_gravity = [[-2] * n for _ in range(n)]
     for j in range(n) :
@@ -108,11 +101,11 @@ while True :
                 next = i - 1
                 after_gravity[i][j] = -1
 
-    print("after gravity")
-    for i in range(n) :
-        for j in range(n) :
-            print(after_gravity[i][j],end = ' ' )
-        print()
+    # print("after gravity")
+    # for i in range(n) :
+    #     for j in range(n) :
+    #         print(after_gravity[i][j],end = ' ' )
+    #     print()
 
     #4. 90 도 반시계 회전
     after_rotate = [[-2] * n for _ in range(n)]
@@ -120,11 +113,11 @@ while True :
         for j in range(n) :
             after_rotate[n-j-1][i] = after_gravity[i][j]
 
-    print("after rotate")
-    for i in range(n) :
-        for j in range(n) :
-            print(after_rotate[i][j],end = ' ' )
-        print()
+    # print("after rotate")
+    # for i in range(n) :
+    #     for j in range(n) :
+    #         print(after_rotate[i][j],end = ' ' )
+    #     print()
 
     #5. 격자 중력 작용
     after_gravity = [[-2] * n for _ in range(n)]
@@ -143,11 +136,11 @@ while True :
         for j in range(n) :
             graph[i][j] = after_gravity[i][j]
 
-    print("after gravity2")
-    for i in range(n) :
-        for j in range(n) :
-            print(graph[i][j],end = ' ' )
-        print()
+    # print("after gravity2")
+    # for i in range(n) :
+    #     for j in range(n) :
+    #         print(graph[i][j],end = ' ' )
+    #     print()
 
 
 print(score)
