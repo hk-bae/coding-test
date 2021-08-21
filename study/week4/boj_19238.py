@@ -11,8 +11,8 @@ start_x,start_y = map(int,input().split()) # 택시 시작 위치
 start_x -= 1
 start_y -= 1
 
-guest_start = [[0] * n for _ in range(n)]
-guest_destination = dict()
+guest_start = [[0] * n for _ in range(n)] # 승객의 출발지
+guest_destination = dict() # 승객의 도착지
 for _ in range(m) : # i는 시작 위치 표시, -i는 도착 위치 표시
     s_r,s_c,d_r,d_c = map(int,input().split())
     guest_start[s_r-1][s_c-1] = 1
@@ -25,7 +25,6 @@ dy = [0,0,1,-1]
 guest, res = 0, -1 # 태운 승객 수 , 결과 값
 
 while True :
-
     # 1.최단거리가 가장 짧은 승객 찾기
     if guest_start[start_x][start_y] == 0  :
         q = deque([(0,start_x,start_y)])
@@ -54,7 +53,6 @@ while True :
                     candidate.sort()
                     f -= (dist + 1) # 승객을 찾으러 가는 거리 만큼 연료 감소
                     start_x,start_y = candidate[0][0], candidate[0][1] # 현재 승객의 위치를 시작위치로 변경
-                    
                     break
                 else : # 승객을 찾지 못했을 경우
                     if len(next) != 0 : # 다음 탐색 위치가 존재하는 경우
