@@ -14,17 +14,15 @@ def solution(board):
     q = []
     heapq.heappush(q,(-500,0,0,-1)) # dist,x,y,d
     distance[0][0] = -500
-
     while q :
         dist,now_x,now_y,d = heapq.heappop(q)
         
         if distance[now_x][now_y] + 500 < dist :
             continue
 
-        for i in range(4) :
+        for i in range(4) : 
             nx = now_x + dx[i]
             ny = now_y + dy[i]
-
 
             if 0<=nx<n and 0<=ny<n and board[nx][ny] != 1 : 
                 if d == i : # 같은 방향
