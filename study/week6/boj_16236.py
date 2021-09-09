@@ -17,7 +17,6 @@ for i in range(n) :
 size = 2 # 아기상어 크기
 eat = 0 # 먹은 물고기
 total_time = 0 # 시간
-distance = 0 # 거리
 
 # 상 좌 우 하
 dx = [-1,0,0,1]
