@@ -1,8 +1,11 @@
 import sys
 
+# 상어의 방향에 따라 이동할 수 있는 곳이 여러 곳이다.
+# 이를 백트래킹을 이용하여 구현
+
 input = sys.stdin.readline
 
-# 상어위치, 먹은 물고기 수 전달
+# 상어위치(x,y), 먹은 물고기 수(value) 전달
 def backtracking(x,y,value,graph,fish_info) :
     global result
     # 그래프 복사
@@ -21,6 +24,7 @@ def backtracking(x,y,value,graph,fish_info) :
         new_fish_info[k][2] = fish_info[k][2]
 
     # 물고기 이동
+    # 낮은 번호 부터 높은 번호까지 탐색하면서 상어가 없는 방향으로 이동
     for num in range(1,17) :
         if not remain[num] : # 먹힌 물고기
             continue
@@ -37,7 +41,7 @@ def backtracking(x,y,value,graph,fish_info) :
             nx = fish_x + dx[d]
             ny = fish_y + dy[d]
             # 범위내이고 상어가 아니면 자리 교체
-            if 0<=nx<4 and 0<=ny<4 and graph[nx][ny] != -1: 
+            if 0<=nx<4 and 0<=ny<4 and new_graph[nx][ny] != -1: 
                 num2 = new_graph[nx][ny] # 교체되는 물고기 번호 또는 빈공간
                 new_graph[nx][ny],new_graph[fish_x][fish_y] = new_graph[fish_x][fish_y],new_graph[nx][ny]     
                 new_fish_info[num] = [nx,ny,d]
@@ -61,7 +65,7 @@ def backtracking(x,y,value,graph,fish_info) :
                 num = new_graph[nx][ny] # 물고기 번호
                 new_graph[nx][ny] = -1 # 상어 이동
                 new_graph[x][y] = 0
-                new_fish_info[-1][2] = new_fish_info[num][2]
+                new_fish_info[-1][2] = new_fish_info[num][2] # 상어의 방향은 먹힌 물고기의 방향이 된다.
                 remain[num] = False 
                 backtracking(nx,ny,value+num,new_graph,new_fish_info)
                 new_graph[nx][ny] = num
@@ -85,10 +89,10 @@ def backtracking(x,y,value,graph,fish_info) :
 dx = [0,-1,-1,0,1,1,1,0,-1]
 dy = [0,0,-1,-1,-1,0,1,1,1]
 
-graph = [[] for _ in range(4)]
+graph = [[] for _ in range(4)] # 물고기 및 상어의 번호만 저장
 remain = [True] * 17 # 살아남은 물고기
 
-fish_info = dict()
+fish_info = dict() # fish_info[물고기 번호] = [행,열,물고기의 방향]
 
 for i in range(4) :
     data = list(map(int,input().split()))
@@ -96,7 +100,7 @@ for i in range(4) :
         graph[i].append(data[j]) # 물고기 번호
         fish_info[data[j]] = [i,j//2,data[j+1]] # 물고기 위치, 방향 저장 
 
-
+# 초기 상어가 (0,0)에 이동한 것을 세팅
 num = graph[0][0] 
 d = fish_info[num][2]
 fish_info[-1] = [0,0,d]

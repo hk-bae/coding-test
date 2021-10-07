@@ -1,9 +1,12 @@
 import sys
+# 에디터
+# 직접 못 푼 문제
+# 인터넷 검색으로 알고리즘을 파악함
 
 input = sys.stdin.readline
 
-stack1 = list(input().rstrip()) # stack1의 top이 커서 위치 유지
-stack2 = []
+stack1 = list(input().rstrip()) # 커서의 왼쪽에 있는 글자
+stack2 = [] # 커서의 오른쪽에 있는 글자
 
 m = int(input())
 for _ in range(m) :

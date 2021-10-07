@@ -1,9 +1,13 @@
-def timeToMin(time) :
-    
+# 셔틀 버스
+from collections import deque
+
+# 시간 문자열을 분(int)으로 변환하는 함수
+def timeToMin(time) :  
     hour,min = map(int,time.split(":"))
     min += hour * 60
     return min
 
+# 분(int)를 시간 문자열로 변환하는 함수
 def minToTime(min) :
     hour = min // 60
     min = min - 60 * hour
@@ -21,30 +25,31 @@ def minToTime(min) :
         time += str(min)
 
     return time 
-    
-    
-from collections import deque
-    
+        
 def solution(n, t, m, timetable):
-    
-    new_timetable = [] 
+
+    # 기존 타임테이블을 분(int)로 담기위한 배열
+    new_timetable = []  
     
     for time in timetable :
         new_timetable.append(timeToMin(time)) # 분으로 변경하여 추가
     
     new_timetable.sort() # 시간 순 정렬
-    q = deque(new_timetable) 
-        
-    ride = [0] * n # ride[k] : 9:00 + k * t 분에 탑승하는 사람 수 
+
+    # 각 승객의 도착 시간을 큐에 담는다.
+    q = deque(new_timetable)
+
+    # 각 배차마다 탑승하는 사람의 수
+    # ride[k] : 9:00 + k * t(배차간격) 분에 탑승하는 사람 수      
+    ride = [0] * n 
     
-    start = timeToMin('09:00')
+    start = timeToMin('09:00') 
     
-    # 마지막 승객 전까지 크루 인원 태우기
+    # 마지막 셔틀 전까지 크루 인원 태우기
     for i in range(n-1) : 
-        bus_arrive = start + i * t
+        bus_arrive = start + i * t # 버스 도착시간
         while q :
             time = q.popleft() # 승객 도착 시간
-            print("#1",time)
             if time > bus_arrive : # 늦은 경우
                 q.appendleft(time)
                 break
@@ -52,7 +57,7 @@ def solution(n, t, m, timetable):
             if ride[i] == m : # 정원 초과
                 q.appendleft(time)
                 break
-            
+
             ride[i] += 1 # 탑승
     
     
@@ -62,11 +67,13 @@ def solution(n, t, m, timetable):
     
     while q :
         time = q.popleft() # 승객 도착 시간
-        print("#2",time)
-        if time > last_bus : # 늦은 경우 무시
+        
+        # 남은 승객들이 모두 늦은 경우
+        if time > last_bus : 
             break
-        print(ride[n-1],m-1)
-        if ride[n-1] == m-1 : # 마지막 한명 남음
+        
+        # 마지막 한명 남음
+        if ride[n-1] == m-1 : 
             max_time = time - 1
             break
         
